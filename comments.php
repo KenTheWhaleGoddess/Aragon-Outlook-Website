@@ -1,6 +1,6 @@
-<?php if ( comments_open() ) : ?>
+<?php if ( comments_open() ) { ?>
 <div class="comments">
-	<?php if ( post_password_required() ) : ?>
+	<?php if ( post_password_required() ) { ?>
 					<p class="nopassword"><?php _e('This post is password protected. Enter the password to view any comments.'); ?></p>
 				</div><!-- #comments -->
 	<?php
@@ -9,7 +9,7 @@
 			 * to fully load the template.
 			 */
 			return;
-		endif;
+	}
 	?>
 
 	<?php
@@ -17,7 +17,7 @@
 	?>
 
 	<div id="comments">
-	<?php if (have_comments()) : ?>
+	<?php if (have_comments()) { ?>
 		<h3><?php printf(_n('1 comment', '%1$s comments', get_comments_number()), number_format_i18n( get_comments_number() ), '' ); ?></h3>
 		<div class="comment_list">
 
@@ -36,22 +36,23 @@
 			</div> -->
 
 		</div>
-	<?php endif; // end have_comments() ?>
+	<?php } // end have_comments() ?>
 	</div>
 
-	<?php if ('open' == $post->comment_status) : ?>
+	<?php if ('open' == $post->comment_status) { ?>
 
 	<div id="respond">
 		<h3>What do you think?</h3>
 		<div class="comment_form">
 
-		<?php if ( get_option('comment_registration') && !$user_ID ) : ?>
+		<?php if ( get_option('comment_registration') && !$user_ID ) { ?>
 			<p class="comment_message">You must be <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?redirect_to=<?php echo urlencode(get_permalink()); ?>">logged in</a> to post a comment.</p>
-		<?php else : ?>
+		<?php } ?>
+		<?php else { ?>
 
 			<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
 
-				<?php if ( $user_ID ) : ?>
+				<?php if ( $user_ID ) { ?>
 
 					<p class="comment_message">Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url(get_permalink()); ?>" title="Log out of this account">Log out &raquo;</a></p>
 
@@ -64,8 +65,8 @@
 							</td>
 						</tr>
 					</table>
-
-				<?php else : ?>
+				<?php } ?>
+				<?php else { ?>
 
 					<table>
 						<tr>
@@ -97,7 +98,7 @@
 						</tr>
 					</table>
 
-				<?php endif; ?>
+				<?php } ?>
 
 				<!--<p class="comment_message"><small><strong>XHTML:</strong> You can use these tags: <code><?php echo allowed_tags(); ?></code></small></p>-->
 
@@ -110,14 +111,14 @@
 
 			</form>
 
-		<?php endif; // If registration required and not logged in ?>
+		<?php } // If registration required and not logged in ?>
 
 		</div>
 
-		<?php endif; // if you delete this the sky will fall on your head ?>
+		<?php } // if you delete this the sky will fall on your head ?>
 
 	</div>
 
 </div>
-<?php endif; // end ! comments_open() ?>
+<?php } // end ! comments_open() ?>
 <!-- #comments -->
