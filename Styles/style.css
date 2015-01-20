@@ -89,6 +89,12 @@ body {
 	padding: 24px 0;
 	}
 
+.scroll {
+	height: 100px;
+	width: 100px;
+	overflow: scroll;
+}
+
 .clear:after {
 	content: ".";
 	display: block;
