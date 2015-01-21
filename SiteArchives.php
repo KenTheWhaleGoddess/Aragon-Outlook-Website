@@ -20,7 +20,9 @@ Template Name: Site Archives
 
 <center>
 	<span class="note">
-		For historical print edition archives, see <a href="https://drive.google.com/folderview?id=0BxNx9rQ4Mblybk1HbGNFVDRpbG8&usp=drive_web" target="_blank">this page</a>.
+		For historical print edition archives, see <a href=
+"https://drive.google.com/folderview?id=0BxNx9rQ4Mblybk1HbGNFVDRpbG8&usp=drive_web" target=
+"_blank">this page</a>.
 	</span>
 </center>
 

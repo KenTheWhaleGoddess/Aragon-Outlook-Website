@@ -65,7 +65,8 @@ class extended_walker extends Walker_Nav_Menu{
 					$cb_args = array_merge( array(&$output, $depth), $args);
 					call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
 				}
-				$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
+				$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, 
+$output );
 			}
 			unset( $children_elements[ $id ] );
 		}
@@ -106,7 +107,8 @@ add_action('admin_menu', 'sight_add_box');
 function sight_add_box() {
 	global $meta_box;
 
-	add_meta_box($meta_box['id'], $meta_box['title'], 'sight_show_box', $meta_box['page'], $meta_box['context'], $meta_box['priority']);
+	add_meta_box($meta_box['id'], $meta_box['title'], 'sight_show_box', $meta_box['page'], 
+$meta_box['context'], $meta_box['priority']);
 }
 
 // Callback function to show fields in meta box
@@ -114,7 +116,8 @@ function sight_show_box() {
 	global $meta_box, $post;
 
 	// Use nonce for verification
-	echo '<input type="hidden" name="sight_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+	echo '<input type="hidden" name="sight_meta_box_nonce" value="', 
+wp_create_nonce(basename(__FILE__)), '" />';
 
 	echo '<table class="form-table">';
 
@@ -123,9 +126,11 @@ function sight_show_box() {
 		$meta = get_post_meta($post->ID, $field['id'], true);
 
 		echo '<tr>',
-				'<th style="width:50%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
+				'<th style="width:50%"><label for="', $field['id'], '">', $field['name'], 
+'</label></th>',
 				'<td>';
-				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
+				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', 
+$meta ? ' checked="checked"' : '', ' />';
 		echo     '<td>',
 			'</tr>';
 	}
@@ -174,7 +179,8 @@ function sight_save_data($post_id) {
 
 function options_admin_menu() {
 	// here's where we add our theme options page link to the dashboard sidebar
-	add_theme_page("Sight Theme Options", "Theme Options", 'edit_themes', basename(__FILE__), 'options_page');
+	add_theme_page("Sight Theme Options", "Theme Options", 'edit_themes', basename(__FILE__), 
+'options_page');
 }
 add_action('admin_menu', 'options_admin_menu');
 
@@ -191,34 +197,52 @@ function options_page() {
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row"><label for="logo_url"><?php _e('Custom logo URL:'); ?></label></th>
-					<td><input type="text" name="logo_url" id="logo_url" size="50" value="<?php echo get_option('logo_url'); ?>"/><br/><span
-							class="description"> <a href="<?php bloginfo("url"); ?>/wp-admin/media-new.php" target="_blank">Upload your logo</a> (max 290px x 128px) using WordPress Media Library and insert its URL here </span><br/><br/><img src="<?php echo (get_option('logo_url')) ? get_option('logo_url') : get_bloginfo('template_url') . '/images/logo.png' ?>"
+					<td><input type="text" name="logo_url" id="logo_url" size="50" value="<?php echo 
+get_option('logo_url'); ?>"/><br/><span
+							class="description"> <a href="<?php bloginfo("url"); 
+?>/wp-admin/media-new.php" target="_blank">Upload your logo</a> (max 
+290px x 128px) using WordPress Media Library and insert its URL here 
+</span><br/><br/><img src="<?php echo (get_option('logo_url')) ? 
+get_option('logo_url') : get_bloginfo('template_url') . 
+'/images/logo.png' ?>"
 					 alt=""/></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label for="bg_color"><?php _e('Custom background color:'); ?></label></th>
-					<td><input type="text" name="bg_color" id="bg_color" size="20" value="<?php echo get_option('bg_color'); ?>"/><span
-							class="description"> e.g., <strong>#07A9FA</strong> or <strong>black</strong></span></td>
+					<th scope="row"><label for="bg_color"><?php _e('Custom background color:'); 
+?></label></th>
+					<td><input type="text" name="bg_color" id="bg_color" size="20" value="<?php echo 
+get_option('bg_color'); ?>"/><span
+							class="description"> e.g., <strong>#07A9FA</strong> or 
+<strong>black</strong></span></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label for="ss_disable"><?php _e('Disable slideshow:'); ?></label></th>
-					<td><input type="checkbox" name="ss_disable" id="ss_disable" <?php echo (get_option('ss_disable'))? 'checked="checked"' : ''; ?>/></td>
+					<th scope="row"><label for="ss_disable"><?php _e('Disable slideshow:'); 
+?></label></th>
+					<td><input type="checkbox" name="ss_disable" id="ss_disable" <?php echo 
+(get_option('ss_disable'))? 'checked="checked"' : ''; ?>/></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label for="ss_timeout"><?php _e('Timeout for slideshow (ms):'); ?></label></th>
-					<td><input type="text" name="ss_timeout" id="ss_timeout" size="20" value="<?php echo get_option('ss_timeout'); ?>"/><span
+					<th scope="row"><label for="ss_timeout"><?php _e('Timeout for slideshow (ms):'); 
+?></label></th>
+					<td><input type="text" name="ss_timeout" id="ss_timeout" size="20" value="<?php 
+echo get_option('ss_timeout'); ?>"/><span
 							class="description"> e.g., <strong>7000</strong></span></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label><?php _e('Pagination:'); ?></label></th>
 					<td>
-						<input type="radio" name="paging_mode" value="default" <?php echo (get_option('paging_mode') == 'default')? 'checked="checked"' : ''; ?>/><span class="description">Default + WP Page-Navi support</span><br/>
-						<input type="radio" name="paging_mode" value="ajax" <?php echo (get_option('paging_mode') == 'ajax')? 'checked="checked"' : ''; ?>/><span class="description">AJAX-fetching posts</span><br/>
+						<input type="radio" name="paging_mode" value="default" <?php echo 
+(get_option('paging_mode') == 'default')? 'checked="checked"' : ''; ?>/><span 
+class="description">Default + WP Page-Navi support</span><br/>
+						<input type="radio" name="paging_mode" value="ajax" <?php echo 
+(get_option('paging_mode') == 'ajax')? 'checked="checked"' : ''; ?>/><span 
+class="description">AJAX-fetching posts</span><br/>
 					</td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label for="ga"><?php _e('Google Analytics code:'); ?></label></th>
-					<td><textarea name="ga" id="ga" cols="48" rows="18"><?php echo get_option('ga'); ?></textarea></td>
+					<td><textarea name="ga" id="ga" cols="48" rows="18"><?php echo get_option('ga'); 
+?></textarea></td>
 				</tr>
 			</table>
 
@@ -268,12 +292,15 @@ class GetConnected extends WP_Widget {
 		?>
 			<?php echo $before_widget; ?>
 				<?php if ( $title )
-					echo $before_title . $title . $after_title;  else echo '<div class="widget-body clear">'; ?>
+					echo $before_title . $title . $after_title;  else echo '<div class="widget-body 
+clear">'; ?>
 
 					<!-- RSS -->
 					<div class="getconnected_rss">
-					<a href="<?php echo ( get_option('feedburner_url') )? get_option('feedburner_url') : get_bloginfo('rss2_url'); ?>">RSS Feed</a>
-					<?php echo (get_option('feedburner_url') && function_exists('feedcount'))? feedcount( get_option('feedburner_url') ) : ''; ?>
+					<a href="<?php echo ( get_option('feedburner_url') )? 
+get_option('feedburner_url') : get_bloginfo('rss2_url'); ?>">RSS Feed</a>
+					<?php echo (get_option('feedburner_url') && function_exists('feedcount'))? 
+feedcount( get_option('feedburner_url') ) : ''; ?>
 					</div>
 					<!-- /RSS -->
 
@@ -281,7 +308,8 @@ class GetConnected extends WP_Widget {
 					<?php if ( get_option('twitter_url') ) : ?>
 					<div class="getconnected_twitter">
 					<a href="<?php echo get_option('twitter_url'); ?>">Twitter</a>
-					<span><?php if ( function_exists('twittercount') ) twittercount( get_option('twitter_url') ); ?> followers</span>
+					<span><?php if ( function_exists('twittercount') ) twittercount( 
+get_option('twitter_url') ); ?> followers</span>
 					</div>
 					<?php endif; ?>
 					<!-- /Twitter -->
@@ -393,7 +421,10 @@ class GetConnected extends WP_Widget {
 
 		$title = esc_attr($instance['title']);
 		?>
-			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input 
+class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo 
+$this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" 
+/></label></p>
 
 			<script type="text/javascript">
 				(function($) {
@@ -408,7 +439,8 @@ class GetConnected extends WP_Widget {
 			</script>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">FeedBurner</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">FeedBurner</a>
 				<p class="social_options">
 					<label for="feedburner_url"><?php _e('FeedBurner feed url:'); ?></label>
 					<input type="text" name="feedburner_url" id="feedburner_url" class="widefat"
@@ -417,90 +449,116 @@ class GetConnected extends WP_Widget {
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Twitter</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Twitter</a>
 				<p class="social_options">
 					<label for="twitter_url">Profile url:</label>
-					<input type="text" name="twitter_url" id="twitter_url" class="widefat" value="<?php echo get_option('twitter_url'); ?>"/>
+					<input type="text" name="twitter_url" id="twitter_url" class="widefat" 
+value="<?php echo get_option('twitter_url'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Facebook</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Facebook</a>
 				<p class="social_options">
 					<label for="fb_url">Profile url:</label>
-					<input type="text" name="fb_url" id="fb_url" class="widefat" value="<?php echo get_option('fb_url'); ?>"/>
+					<input type="text" name="fb_url" id="fb_url" class="widefat" value="<?php echo 
+get_option('fb_url'); ?>"/>
 					<label for="fb_text">Description:</label>
-					<input type="text" name="fb_text" id="fb_text" class="widefat" value="<?php echo get_option('fb_text'); ?>"/>
+					<input type="text" name="fb_text" id="fb_text" class="widefat" value="<?php echo 
+get_option('fb_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Flickr</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Flickr</a>
 				<p class="social_options">
 					<label for="flickr_url">Profile url:</label>
-					<input type="text" name="flickr_url" id="flickr_url" class="widefat" value="<?php echo get_option('flickr_url'); ?>"/>
+					<input type="text" name="flickr_url" id="flickr_url" class="widefat" value="<?php 
+echo get_option('flickr_url'); ?>"/>
 					<label for="flickr_text">Description:</label>
-					<input type="text" name="flickr_text" id="flickr_text" class="widefat" value="<?php echo get_option('flickr_text'); ?>"/>
+					<input type="text" name="flickr_text" id="flickr_text" class="widefat" 
+value="<?php echo get_option('flickr_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Behance</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Behance</a>
 				<p class="social_options">
 					<label for="behance_url">Profile url:</label>
-					<input type="text" name="behance_url" id="behance_url" class="widefat" value="<?php echo get_option('behance_url'); ?>"/>
+					<input type="text" name="behance_url" id="behance_url" class="widefat" 
+value="<?php echo get_option('behance_url'); ?>"/>
 					<label for="behance_text">Description:</label>
-					<input type="text" name="behance_text" id="behance_text" class="widefat" value="<?php echo get_option('behance_text'); ?>"/>
+					<input type="text" name="behance_text" id="behance_text" class="widefat" 
+value="<?php echo get_option('behance_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Delicious</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Delicious</a>
 				<p class="social_options">
 					<label for="delicious_url">Profile url:</label>
-					<input type="text" name="delicious_url" id="delicious_url" class="widefat" value="<?php echo get_option('delicious_url'); ?>"/>
+					<input type="text" name="delicious_url" id="delicious_url" class="widefat" 
+value="<?php echo get_option('delicious_url'); ?>"/>
 					<label for="delicious_text">Description:</label>
-					<input type="text" name="delicious_text" id="delicious_text" class="widefat" value="<?php echo get_option('delicious_text'); ?>"/>
+					<input type="text" name="delicious_text" id="delicious_text" class="widefat" 
+value="<?php echo get_option('delicious_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Stumbleupon</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Stumbleupon</a>
 				<p class="social_options">
 					<label for="stumbleupon_url">Profile url:</label>
-					<input type="text" name="stumbleupon_url" id="stumbleupon_url" class="widefat" value="<?php echo get_option('stumbleupon_url'); ?>"/>
+					<input type="text" name="stumbleupon_url" id="stumbleupon_url" class="widefat" 
+value="<?php echo get_option('stumbleupon_url'); ?>"/>
 					<label for="stumbleupon_text">Description:</label>
-					<input type="text" name="stumbleupon_text" id="stumbleupon_text" class="widefat" value="<?php echo get_option('stumbleupon_text'); ?>"/>
+					<input type="text" name="stumbleupon_text" id="stumbleupon_text" class="widefat" 
+value="<?php echo get_option('stumbleupon_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Tumblr</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Tumblr</a>
 				<p class="social_options">
 					<label for="tumblr_url">Profile url:</label>
-					<input type="text" name="tumblr_url" id="tumblr_url" class="widefat" value="<?php echo get_option('tumblr_url'); ?>"/>
+					<input type="text" name="tumblr_url" id="tumblr_url" class="widefat" value="<?php 
+echo get_option('tumblr_url'); ?>"/>
 					<label for="tumblr_text">Description:</label>
-					<input type="text" name="tumblr_text" id="tumblr_text" class="widefat" value="<?php echo get_option('tumblr_text'); ?>"/>
+					<input type="text" name="tumblr_text" id="tumblr_text" class="widefat" 
+value="<?php echo get_option('tumblr_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Vimeo</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Vimeo</a>
 				<p class="social_options">
 					<label for="vimeo_url">Profile url:</label>
-					<input type="text" name="vimeo_url" id="vimeo_url" class="widefat" value="<?php echo get_option('vimeo_url'); ?>"/>
+					<input type="text" name="vimeo_url" id="vimeo_url" class="widefat" value="<?php 
+echo get_option('vimeo_url'); ?>"/>
 					<label for="vimeo_text">Description:</label>
-					<input type="text" name="vimeo_text" id="vimeo_text" class="widefat" value="<?php echo get_option('vimeo_text'); ?>"/>
+					<input type="text" name="vimeo_text" id="vimeo_text" class="widefat" value="<?php 
+echo get_option('vimeo_text'); ?>"/>
 				</p>
 			</div>
 
 			<div style="margin-bottom: 5px;">
-				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: block; margin-bottom: 5px;">Youtube</a>
+				<a href="javascript: void(0);" class="social_title" style="font-size: 13px; display: 
+block; margin-bottom: 5px;">Youtube</a>
 				<p class="social_options">
 					<label for="youtube_url">Profile url:</label>
-					<input type="text" name="youtube_url" id="youtube_url" class="widefat" value="<?php echo get_option('youtube_url'); ?>"/>
+					<input type="text" name="youtube_url" id="youtube_url" class="widefat" 
+value="<?php echo get_option('youtube_url'); ?>"/>
 					<label for="youtube_text">Description:</label>
-					<input type="text" name="youtube_text" id="youtube_text" class="widefat" value="<?php echo get_option('youtube_text'); ?>"/>
+					<input type="text" name="youtube_text" id="youtube_text" class="widefat" 
+value="<?php echo get_option('youtube_text'); ?>"/>
 				</p>
 			</div>
 		<?php
@@ -520,11 +578,13 @@ class Recentposts_thumbnail extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title']);
 		?>
 			<?php echo $before_widget; ?>
-			<?php if ( $title ) echo $before_title . $title . $after_title;  else echo '<div class="widget-body clear">'; ?>
+			<?php if ( $title ) echo $before_title . $title . $after_title;  else echo '<div 
+class="widget-body clear">'; ?>
 
 			<?php
 				global $post;
-				if (get_option('rpthumb_qty')) $rpthumb_qty = get_option('rpthumb_qty'); else $rpthumb_qty = 5;
+				if (get_option('rpthumb_qty')) $rpthumb_qty = get_option('rpthumb_qty'); else 
+$rpthumb_qty = 5;
 				$q_args = array(
 					'numberposts' => $rpthumb_qty,
 				);
@@ -541,7 +601,8 @@ class Recentposts_thumbnail extends WP_Widget {
 					?>
 					<span class="rpthumb-title" <?php echo $offset; ?>><?php the_title(); ?></span> 
 				
-		<span class="rpthumb-author" <?php echo $offset; unset($offset); ?>>by <?php if(function_exists('coauthors'))
+		<span class="rpthumb-author" <?php echo $offset; unset($offset); ?>>by <?php 
+if(function_exists('coauthors'))
 	coauthors();
 else
 	the_author(); ?></span>
@@ -564,9 +625,16 @@ else
 	function form($instance) {
 		$title = esc_attr($instance['title']);
 		?>
-			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
-			<p><label for="rpthumb_qty">Number of posts:  </label><input type="text" name="rpthumb_qty" id="rpthumb_qty" size="2" value="<?php echo get_option('rpthumb_qty'); ?>"/></p>
-			<p><label for="rpthumb_thumb">Hide thumbnails:  </label><input type="checkbox" name="rpthumb_thumb" id="rpthumb_thumb" <?php echo (get_option('rpthumb_thumb'))? 'checked="checked"' : ''; ?>/></p>
+			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?> <input 
+class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo 
+$this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" 
+/></label></p>
+			<p><label for="rpthumb_qty">Number of posts:  </label><input type="text" 
+name="rpthumb_qty" id="rpthumb_qty" size="2" value="<?php echo get_option('rpthumb_qty'); 
+?>"/></p>
+			<p><label for="rpthumb_thumb">Hide thumbnails:  </label><input type="checkbox" 
+name="rpthumb_thumb" id="rpthumb_thumb" <?php echo (get_option('rpthumb_thumb'))? 
+'checked="checked"' : ''; ?>/></p>
 		<?php
 	}
 
@@ -582,13 +650,17 @@ function commentslist($comment, $args, $depth) {
 			<table>
 				<tr>
 					<td>
-						<?php echo get_avatar($comment, 70, get_bloginfo('template_url').'/images/no-avatar.png'); ?>
+						<?php echo get_avatar($comment, 70, 
+get_bloginfo('template_url').'/images/no-avatar.png'); ?>
 					</td>
 					<td>
 						<div class="comment-meta">
-							<?php printf(__('<p class="comment-author"><span>%s</span> says:</p>'), get_comment_author_link()) ?>
-							<?php printf(__('<p class="comment-date">%s</p>'), get_comment_date('M j, Y')) ?>
-							<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+							<?php printf(__('<p class="comment-author"><span>%s</span> says:</p>'), 
+get_comment_author_link()) ?>
+							<?php printf(__('<p class="comment-date">%s</p>'), get_comment_date('M j, 
+Y')) ?>
+							<?php comment_reply_link(array_merge($args, array('depth' => $depth, 
+'max_depth' => $args['max_depth']))) ?>
 						</div>
 					</td>
 					<td>
@@ -615,7 +687,9 @@ function feedcount($feedurl='http://feeds.feedburner.com/wpshower') {
 	$onedayago = date('Y-m-d', strtotime('-1 days', time()));
 	$today = date('Y-m-d');
 
-	$api = "https://feedburner.google.com/api/awareness/1.0/GetFeedData?uri=$feedid&dates=$twodayago,$onedayago";
+	$api = 
+"https://feedburner.google.com/api/awareness/1.0/GetFeedData?uri=$feedid&dates=$twodayago,$onedayag
+o";
 
 	//Initialize a cURL session
 	$ch = curl_init();
@@ -631,7 +705,8 @@ function feedcount($feedurl='http://feeds.feedburner.com/wpshower') {
 	} else {
 
 		$xml = new SimpleXMLElement($data); //Parse XML via SimpleXML Class
-		$bis = $xml->attributes();  //Bis Contain first attribute, It usually is ok or fail in FeedBurner
+		$bis = $xml->attributes();  //Bis Contain first attribute, It usually is ok or fail in 
+FeedBurner
 
 		if ($bis=='ok'){
 			foreach ($xml->feed as $feed) {
@@ -699,7 +774,8 @@ function seo_title() {
 	# Taxonomy #######################################
 	if (is_tax()) {
 		$curr_tax = get_taxonomy(get_query_var('taxonomy'));
-		$curr_term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy')); # current term data
+		$curr_term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy')); # current 
+term data
 		# if it's term
 		if (!empty($curr_term)) {
 			$newtitle = $curr_tax->label . $sep . $curr_term->name;
@@ -767,8 +843,10 @@ function my_show_extra_profile_fields( $user ) { ?>
 			<th><label for="jobtitle">Job Title</label></th>
 
 			<td>
-				<input type="text" name="jobtitle" id="jobtitle" value="<?php echo esc_attr( get_the_author_meta( 'jobtitle', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description">Example: Features writer 2012-13 / Features editor 2013-14</span>
+				<input type="text" name="jobtitle" id="jobtitle" value="<?php echo esc_attr( 
+get_the_author_meta( 'jobtitle', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Example: Features writer 2012-13 / Features editor 
+2013-14</span>
 			</td>
 		</tr>
 
@@ -785,7 +863,8 @@ function my_save_extra_profile_fields( $user_id ) {
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return false;
 
-	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. */
+	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. 
+*/
 	update_usermeta( $user_id, 'jobtitle', $_POST['jobtitle'] );
 }
 // End of save job title

@@ -22,11 +22,13 @@ Template Name: Archives
 		<?php printf(_c('Yearly archive %s'), get_the_time(__('Y'))); ?>
 		<?php /* If this is an author archive */ } elseif (is_author()) { ?>
 		<?php _e('Author Archive'); ?>
-	<?php /* If this is a paged archive */ } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) { ?>
+	<?php /* If this is a paged archive */ } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) 
+{ ?>
 		<?php _e('Blog Archives'); ?>
 		<?php } ?>
 
-	<a href="javascript: void(0);" id="mode"<?php if ($_COOKIE['mode'] == 'grid') echo ' class="flip"'; ?>></a>
+	<a href="javascript: void(0);" id="mode"<?php if ($_COOKIE['mode'] == 'grid') echo ' class="flip"'
+; ?>></a>
 </div>
 
 <?php get_template_part('loop'); ?>

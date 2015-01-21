@@ -1,4 +1,4 @@
-<?php if (get_option('paging_mode') == 'default') : ?>
+<?php if (get_option('paging_mode') == 'default') { ?>
 
 	<div class="pagination">
 		<?php previous_posts_link(__('Newer')); ?>
@@ -6,10 +6,10 @@
 		<?php if (function_exists('wp_pagenavi')) wp_pagenavi(); ?>
 	</div>
 
-<?php else : ?>
+<?php } else { ?>
 
 	<div id="pagination">
 	<?php next_posts_link(__('LOAD MORE')); ?>
 	</div>
 
-<?php endif; ?>
+<?php } ?>

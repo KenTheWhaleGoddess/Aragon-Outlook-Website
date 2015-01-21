@@ -74,7 +74,8 @@ Template Name: Author bio page
 			?>
 			<div class="post-meta">
 				<h1><?php echo $curauth->display_name; ?>
-				<span class="authorPageJobTitle"><?php the_author_meta( jobtitle, $curauth->ID ); ?></span></h1>
+				<span class="authorPageJobTitle"><?php the_author_meta( jobtitle, $curauth->ID ); 
+?></span></h1>
 			</div>
 			<div class="post-content">
 				<? userphoto_the_author_photo('','',array('class' => 'authorpagephoto')); ?>
@@ -89,9 +90,11 @@ Template Name: Author bio page
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 					<p>
 				<span class="cat"><?php the_category(' / ');?></span>
-				<span class="issue"> | <a href="/<?php the_time('Y'); ?>/<?php the_time('m'); ?>/"><?php the_time('F j, Y'); ?></a></span>
+				<span class="issue"> | <a href="/<?php the_time('Y'); ?>/<?php the_time('m'); 
+?>/"><?php the_time('F j, Y'); ?></a></span>
 				<br />
-				<span class="artTitle"><a class="authorPageArticleLink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">
+				<span class="artTitle"><a class="authorPageArticleLink" href="<?php the_permalink() 
+?>" rel="bookmark" title="<?php the_title(); ?>">
 				<?php the_title(); ?></a></span>
 				</p>
 				<?php endwhile; else: ?>

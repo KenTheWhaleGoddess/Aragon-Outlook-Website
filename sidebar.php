@@ -21,7 +21,8 @@
 			</a>
 		</h3>
 		<div class="gravatar">
-				<a data-instant href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
+				<a data-instant href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); 
+?>">
 					<? userphoto_the_author_thumbnail(); ?>
 				</a>
 		</div>
@@ -41,7 +42,7 @@ else {
 
 
 
-	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Sidebar') ) :
+	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Sidebar') ) {
 		$widget_args = array(
 			'after_widget' => '</div></div>',
 			'before_title' => '<h3>',
@@ -49,7 +50,7 @@ else {
 		);
 	?>
   
-	<?php endif; ?>
+	<?php } ?>
 
 	<div class="sidebar-ad">
 		<div class="advertisement-notice">Advertisement</div>

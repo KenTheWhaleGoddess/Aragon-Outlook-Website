@@ -26,7 +26,8 @@ Template Name: Footer
 		<br />
 	</p>
 	<p>
-		<a href="/masthead">MASTHEAD</a> - <a href="/advertising">ADVERTISING</a> - <a href="/contact">CONTACT US</a>
+		<a href="/masthead">MASTHEAD</a> - <a href="/advertising">ADVERTISING</a> - <a href="/contact"
+>CONTACT US</a>
 	</p>
 			</div>
 

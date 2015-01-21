@@ -9,7 +9,8 @@ Template Name: Index
 
 <div class="content-title">
 	<h1>Latest stories</h1>
-	<a href="javascript: void(0);" id="mode"<?php if ($_COOKIE['mode'] == 'grid') echo ' class="flip"'; ?>></a>
+	<a href="javascript: void(0);" id="mode"<?php if ($_COOKIE['mode'] == 'grid') echo ' class="flip"'; 
+?>></a>
 </div>
 
 <?php query_posts(array(

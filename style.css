@@ -611,7 +611,8 @@ img.long-thumbnail {
 
 .list .post.tag-longthumbnail a.thumb { display: none }
 
-/* small square thumbnails for posts tagged "smallsquarethumbnail" and for posts in category "Print Edition" */
+/* small square thumbnails for posts tagged "smallsquarethumbnail" and for posts in category "Print 
+Edition" */
 .list .post.tag-smallsquarethumbnail { padding-top: 20px }
 
 	.list .post.tag-smallsquarethumbnail .thumb img {
