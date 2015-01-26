@@ -4,7 +4,7 @@ Template Name: Loop
 */
 ?>
 
-<?php if ( have_posts() )  ?>
+<?php if ( have_posts() ) { ?>
 
 	<div id="loop" class="<?php if ($_COOKIE['mode'] == 'grid') echo 'grid'; else echo 'list'; ?> 
 clear">
