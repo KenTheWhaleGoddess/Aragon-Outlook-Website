@@ -3,7 +3,7 @@
 
 <div id="column1" style="float: left; margin: 0;"> 
 <div style="height:310px;width:310px;border:solid 2px 
-grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
+#aeaeae;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
 
 <br></br>
 <div class="content-title">
@@ -16,7 +16,7 @@ grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
 
 </div>
 <div style="height:310px;width:310px;border:solid 2px 
-grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
+#aeaeae;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
 
 <br></br>
 <div class="content-title">
@@ -31,7 +31,7 @@ grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
 
 <div id="column2" style="float: left; margin: 0; width: 50%">
 <div style="height:310px;width:310px;border:solid 2px 
-grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
+#aeaeae;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
 
 <br></br>
 <div class="content-title">
@@ -44,7 +44,7 @@ grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">
 </div>
 
 <div style="height:310px;width:310px;border:solid 2px 
-grey;overflow:scroll;overflow-x:hidden;overflow-y:scroll;"
+#aeaeae;overflow:scroll;overflow-x:hidden;overflow-y:scroll;"
 
 <div class="content-title">
 	<h1>Sports</h1>
