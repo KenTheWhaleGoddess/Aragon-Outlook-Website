@@ -11,7 +11,39 @@
 	<a href="javascript: void(0);" id="mode"<?php if ($_COOKIE['mode'] == 'grid') echo ' class="flip"'; ?>></a>
 </div>
 
-<?php //FEATURES article loop here ?>
+
+
+
+
+
+
+
+
+
+<div class="content-title">
+
+    <?php $post = $posts[0]; // Hack. Set $post so that the_date() works. ?>
+
+
+		<h1>
+			<div class="categoryTitle"><?php single_cat_title(); ?></div>
+			<span class="CatDescription"><?php echo category_description(); ?></span>
+		</h1>
+
+
+    <a href="javascript: void(0);" id="mode"<?php if ($_COOKIE['mode'] == 'grid') echo ' class="flip"'; ?>></a>
+</div>
+
+<?php get_template_part('loop'); ?>
+
+
+
+
+
+
+
+
+
 
 
 </div>
